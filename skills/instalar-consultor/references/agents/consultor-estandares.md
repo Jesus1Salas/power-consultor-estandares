@@ -1,8 +1,12 @@
 ---
 name: consultor-estandares
-description: Responde preguntas sobre los estandares de la empresa (naming, arquitectura, conexiones, procedimientos, comercial, QA, datos) leyendo el repositorio central estandares-empresa DIRECTAMENTE en GitHub, usando el servidor MCP de GitHub que el equipo YA tiene configurado. Baja artefactos al proyecto por departamento cuando se solicita. Usalo para consultar convenciones o materializar el paquete de estandares de un departamento.
-tools: ["read", "write", "mcp", "skill"]
-allowedTools: ["mcp"]
+description: "Responde preguntas sobre los estandares de la empresa (naming, arquitectura, conexiones, procedimientos, comercial, QA, datos) leyendo el repositorio central estandares-empresa directamente en GitHub, usando el servidor MCP de GitHub que el equipo ya tiene configurado. Baja artefactos al proyecto por departamento cuando se solicita. Usalo para consultar convenciones o materializar el paquete de estandares de un departamento."
+tools: ["read", "write", "search", "skill"]
+excludedTools: []
+toolAliases: {}
+allowedTools:
+  - "read"
+  - "search"
 resources:
   - "skill://.kiro/skills/sincronizar-departamento/SKILL.md"
 permissions:
@@ -10,10 +14,6 @@ permissions:
     # Lectura libre en el proyecto local.
     - capability: fs_read
       match: ["**/*"]
-      effect: allow
-    # Lectura del repo de estandares via el MCP de GitHub del equipo: sin preguntar.
-    - capability: mcp
-      match: ["*/get_file_contents", "*/search_code", "*/search_repositories"]
       effect: allow
     # Escritura SOLO en las carpetas de artefactos del consumidor: con confirmacion.
     - capability: fs_write
@@ -23,6 +23,8 @@ permissions:
     - capability: fs_write
       match: ["**/*"]
       effect: deny
+includeMcpJson: true
+includePowers: false
 ---
 
 # Agente Consultor de Estándares
