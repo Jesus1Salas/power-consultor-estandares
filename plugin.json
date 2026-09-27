@@ -2,7 +2,7 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "consultor-estandares",
   "version": "1.0.0",
-  "description": "Instala un consultor de estandares de la empresa: responde preguntas sobre los estandares (via MCP de solo lectura al repo estandares-empresa) y baja artefactos al proyecto por departamento (candado exclusivo con override). Incluye skills de instalacion y sincronizacion, steering de uso y el servidor MCP 'estandares'.",
+  "description": "Instala un consultor de estandares de la empresa: responde preguntas sobre los estandares leyendo el repo estandares-empresa en GitHub (usando el servidor MCP de GitHub que ya tiene configurado el equipo) y baja artefactos al proyecto por departamento (candado exclusivo con override). Incluye skills de instalacion y sincronizacion, steering de uso, agente y hook. El Power NO trae servidor MCP propio.",
   "author": {
     "name": "Jesus Salas"
   },

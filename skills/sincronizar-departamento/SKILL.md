@@ -12,7 +12,9 @@ Objetivo: traer al proyecto **todos los artefactos de un departamento** leyéndo
 
 ## Fuente (fija)
 
-- Servidor MCP: `estandares-github` (operaciones de **lectura**).
+- Acceso: el **servidor MCP de GitHub que el equipo ya tiene configurado**
+  (herramientas de **lectura**: `get_file_contents`, `search_code`). El Power no
+  trae servidor propio.
 - Repo: **`Jesus1Salas/estandares-empresa`**, rama `main`.
 - Índice: `catalog.json` en la raíz.
 
@@ -28,10 +30,13 @@ El departamento de cada artefacto se deriva del campo `ambito` en `catalog.json`
 
 ## Reglas duras (no negociables)
 
-- **Solo lectura sobre el repo de estándares.** Usa únicamente `get_file_contents`
-  (y `search_code` si hace falta). **Nunca** `create_or_update_file`,
-  `push_files`, `create_pull_request`, `delete_file` ni cualquier operación que
-  modifique el repo fuente.
+- **Solo lectura sobre el repo de estándares.** Usa únicamente las herramientas de
+  lectura del MCP de GitHub del equipo (`get_file_contents`, y `search_code` si
+  hace falta). **Nunca** `create_or_update_file`, `push_files`,
+  `create_pull_request`, `delete_file` ni cualquier operación que modifique el repo
+  fuente.
+- Si **no hay** un MCP de GitHub disponible que pueda leer el repo, detente e
+  informa (remite a la skill `instalar-consultor`); no inventes contenido.
 - **Solo escritura dentro de `.kiro/`** del proyecto consumidor.
 - **Nunca** materializar un artefacto que no esté en `catalog.json`.
 
@@ -56,8 +61,9 @@ si el usuario quiere **también `global`**. Si no lo menciona, **recomiéndalo**
 pero no lo bajes sin confirmación.
 
 ### Paso 1 — Leer el catálogo (remoto)
-Lee `catalog.json` con `get_file_contents` (owner `Jesus1Salas`, repo
-`estandares-empresa`, path `catalog.json`, ref `main`). Filtra los artefactos
+Lee `catalog.json` con la herramienta `get_file_contents` del MCP de GitHub del
+equipo (owner `Jesus1Salas`, repo `estandares-empresa`, path `catalog.json`, ref
+`main`). Filtra los artefactos
 cuyo `ambito` coincida con el departamento (y `global` si aplica) y que sean
 materializables (`materializable: true` o `"merge"` para los `mcp`).
 

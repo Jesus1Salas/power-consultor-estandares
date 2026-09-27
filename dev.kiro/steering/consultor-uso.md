@@ -6,12 +6,14 @@ inclusion: always
 
 Este proyecto tiene instalado el **consultor de estándares** de la empresa, que
 lee el repositorio central `Jesus1Salas/estandares-empresa` **directamente en
-GitHub** (vía MCP `estandares-github`, solo lectura). No se clona el repo.
+GitHub**, usando el **servidor MCP de GitHub que el equipo ya tiene configurado**
+(solo lectura). El Power no trae servidor MCP propio y no se clona el repo.
 
 ## Requisito
 
-- Variable de entorno `GITHUB_PERSONAL_ACCESS_TOKEN` con un token que tenga
-  **acceso de lectura** al repo privado de estándares.
+- Un **servidor MCP de GitHub** configurado en el equipo (el mismo que se usa para
+  el trabajo diario) con acceso de **lectura** al repo de estándares. Si no existe,
+  la skill `instalar-consultor` guía cómo añadirlo.
 
 ## Consultar
 
@@ -44,5 +46,6 @@ departamento anterior (lo registrado en el lock) antes de bajar el nuevo.
 - La fuente de verdad es el repo `estandares-empresa`; aquí **no se edita** ningún
   estándar bajado. Si algo debe cambiar, propón el cambio por **Pull Request** en
   el repo central.
-- El consultor **nunca** escribe en el repo de estándares: solo lo lee vía GitHub
-  y copia hacia `.kiro/` de este proyecto.
+- El consultor **nunca** escribe en el repo de estándares: solo lo lee (vía el MCP
+  de GitHub del equipo) y copia hacia `.kiro/` de este proyecto. Aunque el token
+  del equipo pueda escribir, el consultor tiene prohibido hacerlo.
