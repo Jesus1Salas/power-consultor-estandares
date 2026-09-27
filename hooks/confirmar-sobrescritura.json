@@ -1,0 +1,14 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Confirmar sobrescritura de estandares",
+      "trigger": "PreToolUse",
+      "matcher": "fs_write|str_replace|fs_append",
+      "action": {
+        "type": "agent",
+        "prompt": "Si esta escritura apunta a un archivo dentro de .kiro/steering, .kiro/skills, .kiro/agents o .kiro/hooks que YA existe, confirma con el usuario antes de sobrescribir, mostrando que version local hay (segun .kiro/estandares.lock.json) y que version nueva se va a traer. Si el archivo no existe, procede sin preguntar. Nunca permitas escritura hacia el repositorio de estandares (fuente de verdad): esa ruta es de solo lectura."
+      }
+    }
+  ]
+}
