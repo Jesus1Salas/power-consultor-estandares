@@ -1,6 +1,6 @@
 ---
 name: instalar-consultor
-description: Deja el consultor de estandares operativo en el proyecto: materializa el agente y el hook desde references/, y verifica que exista un servidor MCP de GitHub configurado en el equipo (el Power NO trae servidor MCP propio). Ejecutala una vez por proyecto.
+description: "Deja el consultor de estandares operativo en el proyecto. Materializa el agente y el hook desde references/, y verifica que exista un servidor MCP de GitHub configurado en el equipo (el Power NO trae servidor MCP propio). Ejecutala una vez por proyecto."
 ---
 
 # Skill: Instalar Consultor de Estándares
