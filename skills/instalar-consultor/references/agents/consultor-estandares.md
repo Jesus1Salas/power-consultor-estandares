@@ -15,15 +15,13 @@ permissions:
     - capability: fs_read
       match: ["**/*"]
       effect: allow
-    # Escritura en las carpetas de artefactos del consumidor: permitida
-    # (la skill sincronizar-departamento pide confirmacion si el archivo ya existe).
+    # Escritura permitida SOLO dentro de .kiro/ (carpetas de artefactos del
+    # consumidor y archivos de estado del consultor). Sin regla deny catch-all:
+    # al no declarar allow para otras rutas, la escritura fuera de .kiro/ no ocurre.
+    # La skill sincronizar-departamento pide confirmacion si el archivo ya existe.
     - capability: fs_write
-      match: [".kiro/steering/**", ".kiro/skills/**", ".kiro/agents/**", ".kiro/hooks/**", ".kiro/settings/mcp.json", ".kiro/estandares.lock.json"]
+      match: [".kiro/**"]
       effect: allow
-    # Nunca escribir fuera de .kiro/.
-    - capability: fs_write
-      match: ["**/*"]
-      effect: deny
 includeMcpJson: true
 includePowers: false
 ---
