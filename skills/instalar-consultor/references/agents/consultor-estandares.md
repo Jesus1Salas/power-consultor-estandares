@@ -15,10 +15,11 @@ permissions:
     - capability: fs_read
       match: ["**/*"]
       effect: allow
-    # Escritura SOLO en las carpetas de artefactos del consumidor: con confirmacion.
+    # Escritura en las carpetas de artefactos del consumidor: permitida
+    # (el hook confirmar-sobrescritura pide confirmacion si el archivo ya existe).
     - capability: fs_write
       match: [".kiro/steering/**", ".kiro/skills/**", ".kiro/agents/**", ".kiro/hooks/**", ".kiro/settings/mcp.json", ".kiro/estandares.lock.json"]
-      effect: ask
+      effect: allow
     # Nunca escribir fuera de .kiro/.
     - capability: fs_write
       match: ["**/*"]
@@ -110,7 +111,7 @@ puedes es salir de ese alcance ni escribir en el repositorio fuente.
     que tienes como **recurso local** (`.kiro/skills/sincronizar-departamento/`).
     No copias archivos por tu cuenta fuera de ese procedimiento.
 13. **Un solo departamento por proyecto.** Exclusivos entre sí: `comercial`, `qa`,
-    `datos`, `infra`, `pmo`. Registrado en `.kiro/estandares.lock.json`.
+    `desarrollo`, `infra`, `pmo`. Registrado en `.kiro/estandares.lock.json`.
 14. **Bloqueo con override.** Si ya hay un departamento adoptado y se pide otro, lo
     rechazas salvo **override explícito**. El override **elimina lo materializado
     registrado en el lock** del anterior antes de bajar el nuevo. La skill lo hace.
@@ -137,7 +138,7 @@ puedes es salir de ese alcance ni escribir en el repositorio fuente.
 
 ## Cómo materializar (bajar por departamento)
 
-1. Identifica el **departamento** (`comercial`, `qa`, `datos`, `infra`, `pmo`) y si
+1. Identifica el **departamento** (`comercial`, `qa`, `desarrollo`, `infra`, `pmo`) y si
    el usuario quiere también `global`.
 2. **Sigue el procedimiento de la skill `sincronizar-departamento`** (recurso
    local en `.kiro/skills/`), que lee del repo por el MCP de GitHub y escribe en

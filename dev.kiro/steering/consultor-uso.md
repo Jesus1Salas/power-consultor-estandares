@@ -26,7 +26,7 @@ fuente** (`id` y `ruta`). Si algo no está documentado, lo dice; no inventa.
 
 Los estándares se bajan **por departamento**, leyéndolos de GitHub:
 
-- Departamentos exclusivos entre sí: `comercial`, `qa`, `datos`, `infra`, `pmo`.
+- Departamentos exclusivos entre sí: `comercial`, `qa`, `desarrollo`, `infra`, `pmo`.
 - **Un solo departamento por proyecto**, registrado en
   `.kiro/estandares.lock.json`.
 - `global` (patrones de código, commits, seguridad, arquitectura, etc.) es

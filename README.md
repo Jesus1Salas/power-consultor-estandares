@@ -54,7 +54,7 @@ power-consultor-estandares/
 
 ## Reglas de departamento
 
-- Departamentos **exclusivos entre sí:** `comercial`, `qa`, `datos`, `infra`,
+- Departamentos **exclusivos entre sí:** `comercial`, `qa`, `desarrollo`, `infra`,
   `pmo`. **Un solo departamento por proyecto**, registrado en
   `.kiro/estandares.lock.json`.
 - `global` es **transversal**: se recomienda bajarlo con el departamento, pero

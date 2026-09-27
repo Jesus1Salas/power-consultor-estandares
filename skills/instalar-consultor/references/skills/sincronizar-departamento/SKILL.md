@@ -20,7 +20,7 @@ Objetivo: traer al proyecto **todos los artefactos de un departamento** leyéndo
 
 ## Taxonomía de departamentos
 
-- **Exclusivos entre sí:** `comercial`, `qa`, `datos`, `infra`, `pmo`.
+- **Exclusivos entre sí:** `comercial`, `qa`, `desarrollo`, `infra`, `pmo`.
   Un proyecto solo puede tener **uno** adoptado a la vez.
 - **Transversal:** `global`. No consume el candado; puede acompañar a cualquier
   departamento. Se recomienda bajarlo junto al departamento, pero solo si el
@@ -56,7 +56,7 @@ El departamento de cada artefacto se deriva del campo `ambito` en `catalog.json`
 ## Procedimiento
 
 ### Paso 0 — Determinar la petición
-Identifica el **departamento** (`comercial` | `qa` | `datos` | `infra` | `pmo`) y
+Identifica el **departamento** (`comercial` | `qa` | `desarrollo` | `infra` | `pmo`) y
 si el usuario quiere **también `global`**. Si no lo menciona, **recomiéndalo**
 pero no lo bajes sin confirmación.
 
