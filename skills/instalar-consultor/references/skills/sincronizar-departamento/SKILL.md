@@ -79,10 +79,21 @@ Lee `.kiro/estandares.lock.json` si existe:
 
 ### Paso 3 — Override (solo con confirmación explícita)
 1. Lee del lock la lista de `artefactos` del departamento anterior.
-2. **Elimina cada `destino`** registrado en el lock (solo lo registrado; no toques
-   lo que el usuario creó por su cuenta). Carpetas (skills/agentes) completas.
-3. Ajusta `global` según el nuevo departamento (pregunta si conservarlo).
-4. Reinicia el lock antes de registrar el nuevo departamento.
+2. **Elimina lo materializado** de cada artefacto registrado en el lock (solo lo
+   registrado; no toques lo que el usuario creó por su cuenta):
+   - **`steering` / `hook`:** elimina el archivo `destino`.
+   - **`skill`:** el `destino` es un archivo dentro de una carpeta (p. ej.
+     `.kiro/skills/generador-casos-prueba/SKILL.md`). **Elimina la carpeta
+     completa de la skill** (`.kiro/skills/<id-skill>/`), no solo el `SKILL.md`,
+     para no dejar carpetas vacías.
+   - **`agent`:** elimina el archivo del agente; si el agente vive en una carpeta
+     propia, elimina la carpeta completa.
+3. **No dejes carpetas vacías.** Tras borrar, revisa las carpetas contenedoras que
+   hayan quedado sin contenido (p. ej. subcarpetas bajo `.kiro/skills/`) y
+   elimínalas también. El resultado debe ser como si esos artefactos nunca se
+   hubieran materializado.
+4. Ajusta `global` según el nuevo departamento (pregunta si conservarlo).
+5. Reinicia el lock antes de registrar el nuevo departamento.
 5. Continúa en el Paso 4.
 
 ### Paso 4 — Materializar (leer de GitHub → escribir en .kiro/)
