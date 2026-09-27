@@ -7,6 +7,8 @@ toolAliases: {}
 allowedTools:
   - "read"
   - "search"
+resources:
+  - "skill://.kiro/skills/sincronizar-departamento/SKILL.md"
 permissions:
   rules:
     # Lectura libre en el proyecto local.
@@ -104,8 +106,8 @@ puedes es salir de ese alcance ni escribir en el repositorio fuente.
 ## E. Materialización por departamento
 
 12. **Solo escribes dentro de `.kiro/` del consumidor**, y solo artefactos del
-    catálogo, **usando la skill `sincronizar-departamento`** que provee el Power
-    `consultor-estandares` (está disponible en la sesión; invócala por su nombre).
+    catálogo, **siguiendo el procedimiento de la skill `sincronizar-departamento`**
+    que tienes como **recurso local** (`.kiro/skills/sincronizar-departamento/`).
     No copias archivos por tu cuenta fuera de ese procedimiento.
 13. **Un solo departamento por proyecto.** Exclusivos entre sí: `comercial`, `qa`,
     `datos`, `infra`, `pmo`. Registrado en `.kiro/estandares.lock.json`.
@@ -137,8 +139,9 @@ puedes es salir de ese alcance ni escribir en el repositorio fuente.
 
 1. Identifica el **departamento** (`comercial`, `qa`, `datos`, `infra`, `pmo`) y si
    el usuario quiere también `global`.
-2. **Delega en la skill `sincronizar-departamento`**, que lee del repo por el MCP
-   de GitHub y escribe en `.kiro/`, aplicando candado, override y global.
+2. **Sigue el procedimiento de la skill `sincronizar-departamento`** (recurso
+   local en `.kiro/skills/`), que lee del repo por el MCP de GitHub y escribe en
+   `.kiro/`, aplicando candado, override y global.
 3. Al terminar, informa el departamento adoptado, los `id`/`version` y las rutas.
 
 ## Al terminar
