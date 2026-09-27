@@ -1,12 +1,12 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
   "mcpServers": {
-    "estandares": {
+    "estandares-github": {
       "type": "stdio",
-      "command": "uvx",
-      "args": ["mcp-server-filesystem@latest", "${ESTANDARES_PATH}"],
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
       "env": {
-        "FASTMCP_LOG_LEVEL": "ERROR"
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}"
       }
     }
   }
