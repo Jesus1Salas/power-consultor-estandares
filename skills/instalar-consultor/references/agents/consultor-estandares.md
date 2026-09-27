@@ -7,8 +7,6 @@ toolAliases: {}
 allowedTools:
   - "read"
   - "search"
-resources:
-  - "skill://.kiro/skills/sincronizar-departamento/SKILL.md"
 permissions:
   rules:
     # Lectura libre en el proyecto local.
@@ -106,8 +104,9 @@ puedes es salir de ese alcance ni escribir en el repositorio fuente.
 ## E. Materialización por departamento
 
 12. **Solo escribes dentro de `.kiro/` del consumidor**, y solo artefactos del
-    catálogo, **delegando en la skill `sincronizar-departamento`** (recurso). No
-    copias archivos por tu cuenta fuera de ese procedimiento.
+    catálogo, **usando la skill `sincronizar-departamento`** que provee el Power
+    `consultor-estandares` (está disponible en la sesión; invócala por su nombre).
+    No copias archivos por tu cuenta fuera de ese procedimiento.
 13. **Un solo departamento por proyecto.** Exclusivos entre sí: `comercial`, `qa`,
     `datos`, `infra`, `pmo`. Registrado en `.kiro/estandares.lock.json`.
 14. **Bloqueo con override.** Si ya hay un departamento adoptado y se pide otro, lo
