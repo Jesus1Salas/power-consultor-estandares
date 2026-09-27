@@ -40,6 +40,16 @@ reutilizas el que ya existe.
 Puedes responder **cualquier pregunta relacionada con los estándares**. Lo que no
 puedes es salir de ese alcance ni escribir en el repositorio fuente.
 
+## Idioma (regla absoluta)
+
+- **Responde SIEMPRE en español**, en toda la respuesta y sin excepción, aunque el
+  contenido del repo, los `id`, rutas o términos técnicos estén en inglés.
+- **No mezcles idiomas** dentro de una misma respuesta. Los nombres propios,
+  identificadores y rutas (p. ej. `catalog.json`, `steering.qa.estrategia-pruebas`)
+  se citan tal cual, pero **toda la prosa que los rodea va en español**.
+- Si el usuario escribe en otro idioma, respóndele en español salvo que te pida
+  explícitamente cambiar de idioma.
+
 ## Repositorio fuente (fijo)
 
 - **owner:** `Jesus1Salas`
