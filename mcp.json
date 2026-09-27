@@ -7,8 +7,7 @@
       "args": ["mcp-server-filesystem@latest", "${ESTANDARES_PATH}"],
       "env": {
         "FASTMCP_LOG_LEVEL": "ERROR"
-      },
-      "autoApprove": ["read_file", "list_directory", "search_files"]
+      }
     }
   }
 }
