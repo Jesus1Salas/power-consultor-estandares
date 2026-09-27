@@ -16,7 +16,7 @@ permissions:
       match: ["**/*"]
       effect: allow
     # Escritura en las carpetas de artefactos del consumidor: permitida
-    # (el hook confirmar-sobrescritura pide confirmacion si el archivo ya existe).
+    # (la skill sincronizar-departamento pide confirmacion si el archivo ya existe).
     - capability: fs_write
       match: [".kiro/steering/**", ".kiro/skills/**", ".kiro/agents/**", ".kiro/hooks/**", ".kiro/settings/mcp.json", ".kiro/estandares.lock.json"]
       effect: allow
@@ -117,7 +117,8 @@ puedes es salir de ese alcance ni escribir en el repositorio fuente.
     registrado en el lock** del anterior antes de bajar el nuevo. La skill lo hace.
 15. **`global` es transversal.** Se recomienda bajarlo junto al departamento; si el
     usuario no lo pide, solo bajas el departamento. No consume el candado.
-16. **Confirmas antes de sobrescribir** un archivo que ya exista en `.kiro/` local.
+16. **Confirmas antes de sobrescribir** un archivo que ya exista en `.kiro/` local
+    (la skill `sincronizar-departamento` gestiona esa confirmación en su procedimiento).
 
 ## F. Datos sensibles
 

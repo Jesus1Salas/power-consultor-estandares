@@ -96,7 +96,7 @@ Para cada artefacto seleccionado (departamento + global si aplica):
      `SKILL.md`/`.md`, `README.md`, y todo lo de `assets/`), recreando la
      estructura en `destino`.
 3. Si el `destino` ya existe en `.kiro/`, **confirma antes de sobrescribir**
-   (versión local vs. nueva). El hook `PreToolUse` lo refuerza.
+   (versión local vs. nueva). Si no existe, escríbelo sin preguntar.
 4. **Caso `mcp`** (`materializable: "merge"`): no sobrescribas
    `.kiro/settings/mcp.json`; **fusiona** el bloque `mcpServers.<nombre>` sin
    borrar otros servidores.

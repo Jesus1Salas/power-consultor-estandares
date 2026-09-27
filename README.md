@@ -23,17 +23,17 @@ power-consultor-estandares/
 │   └── steering/consultor-uso.md               Steering de uso
 ├── skills/
 │   ├── instalar-consultor/
-│   │   ├── SKILL.md                             Materializa agente y hook; verifica MCP GitHub
+│   │   ├── SKILL.md                             Copia el agente y la skill a .kiro/
 │   │   └── references/
 │   │       ├── agents/consultor-estandares.md  Plantilla del agente (+ guardrails)
-│   │       └── hooks/confirmar-sobrescritura.json
+│   │       └── skills/sincronizar-departamento/SKILL.md
 │   └── sincronizar-departamento/SKILL.md       Bajada por departamento (candado)
 └── README.md
 ```
 
-> Un Power empaqueta **skills y steering**, pero **no** agentes ni hooks; por eso
-> viajan como plantillas en `references/` y la skill de instalación los materializa
-> en `.kiro/`. Y **no declara servidor MCP**: usa el de GitHub del equipo.
+> Un Power empaqueta **skills y steering**, pero **no** agentes; por eso el agente
+> viaja como plantilla en `references/` y la skill de instalación lo materializa en
+> `.kiro/`. Y **no declara servidor MCP**: usa el de GitHub del equipo.
 
 ## Requisito previo
 
@@ -45,8 +45,8 @@ power-consultor-estandares/
 ## Cómo se usa
 
 1. Asegúrate de tener un MCP de GitHub con acceso de lectura al repo de estándares.
-2. Instala el Power y ejecuta la skill `instalar-consultor` (materializa el agente
-   y el hook, y verifica el acceso a GitHub).
+2. Instala el Power y ejecuta la skill `instalar-consultor` (copia el agente y la
+   skill de sincronización a `.kiro/`).
 3. **Consulta:** pregunta cualquier convención; el agente responde citando la
    fuente (`id` y `ruta`).
 4. **Baja por departamento:** *"baja los estándares de QA"* (opcional: *"junto con
