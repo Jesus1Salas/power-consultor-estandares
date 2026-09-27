@@ -1,43 +1,63 @@
 ---
 name: instalar-consultor
-description: Instala el agente consultor de estandares en el proyecto actual: coloca el agente, la skill de sincronizacion por departamento, el steering de uso, el hook de confirmacion y configura el MCP de solo lectura hacia el repo de estandares.
-version: 1.0.0
+description: Materializa en el workspace las piezas del consultor de estandares que un Power no puede empaquetar (el agente y el hook), copiandolas desde references/. El servidor MCP 'estandares' y el steering de uso ya los provee el Power al instalarse. Ejecutala una vez por proyecto.
 ---
 
 # Skill: Instalar Consultor de Estándares
 
-Objetivo: dejar el proyecto listo para **consultar** y **materializar por
-departamento** los estándares de la empresa.
+Un Power puede empaquetar **skills, steering y servidores MCP**, pero **no**
+agentes (`.kiro/agents/`) ni hooks (`.kiro/hooks/`). Esta skill cierra esa brecha:
+**materializa** esas piezas en el workspace copiando las plantillas incluidas en
+`references/`.
 
-## Pasos
+Ejecútala **una sola vez por proyecto** (o cuando quieras restaurar los archivos).
 
-1. **Pide la ruta del repo de estándares.** Dónde está clonado
-   `estandares-empresa` en local (o su URL de Git si se usará git-MCP). Se usará
-   como `${ESTANDARES_PATH}`.
-2. **Configura el MCP (solo lectura).** Fusiona el bloque `mcpServers.estandares`
-   de `mcp/mcp.json` en `.kiro/settings/mcp.json` del proyecto, sustituyendo
-   `${ESTANDARES_PATH}` por la ruta dada. Si el archivo existe, **fusiona sin
-   borrar** otros servidores. El `autoApprove` debe quedar limitado a lectura
-   (`read_file`, `list_directory`, `search_files`).
-3. **Instala el agente.** Copia `agents/consultor-estandares.md` a `.kiro/agents/`.
-4. **Instala la skill de sincronización.** Copia
-   `skills/sincronizar-departamento/` a `.kiro/skills/`.
-5. **Instala el steering de uso.** Copia `steering/consultor-uso.md` a
-   `.kiro/steering/`.
-6. **Instala el hook de confirmación.** Copia
-   `hooks/confirmar-sobrescritura.json` a `.kiro/hooks/`.
-7. **Verifica.** Pide al agente consultor que lea `catalog.json` vía MCP y liste
-   los departamentos disponibles. Si responde con el catálogo, la instalación fue
-   correcta.
+## Lo que YA provee el Power (no lo hace esta skill)
 
-## Resultado esperado
+- **Servidor MCP `estandares`** (solo lectura hacia el repo de estándares),
+  declarado en el `mcp.json` del Power. Solo debes definir la variable de entorno
+  `ESTANDARES_PATH` con la ruta local del repo `estandares-empresa` clonado.
+- **Steering de uso** (`consultor-uso.md`), incluido en `dev.kiro/steering/`.
+- **Skill de sincronización** `sincronizar-departamento`.
 
-El proyecto queda con: agente consultor, skill de sincronización por departamento,
-steering de uso, hook de confirmación y MCP de solo lectura conectado al repo de
-estándares.
+## Qué crea esta skill
+
+Agente (en `.kiro/agents/`):
+- `consultor-estandares.md` — responde sobre estándares y baja artefactos por
+  departamento (con sus guardrails).
+
+Hook (en `.kiro/hooks/`):
+- `confirmar-sobrescritura.json` — `PreToolUse`: confirma antes de sobrescribir un
+  artefacto que ya exista en `.kiro/`.
+
+## Procedimiento
+
+1. Lee cada archivo plantilla de la carpeta `references/` de esta skill.
+2. Escribe su contenido **tal cual** en la ruta destino del workspace:
+
+   | Plantilla (references/) | Destino en el workspace |
+   |-------------------------|-------------------------|
+   | `agents/consultor-estandares.md` | `.kiro/agents/consultor-estandares.md` |
+   | `hooks/confirmar-sobrescritura.json` | `.kiro/hooks/confirmar-sobrescritura.json` |
+
+3. **Configura la ruta del repo de estándares.** Confirma que existe la variable
+   de entorno `ESTANDARES_PATH` apuntando al repo `estandares-empresa` clonado en
+   local. Si no está, indícale al usuario cómo definirla (es lo que usa el MCP
+   `estandares` para leer el repo). El consultor **no clona** el repo: se clona
+   manualmente una vez.
+4. Como las escrituras de archivos piden confirmación, agrupa la explicación y
+   avisa al usuario de que se van a crear estos archivos antes de escribirlos.
+5. **Verifica.** Pide al agente `consultor-estandares` que lea `catalog.json` vía
+   MCP y liste los departamentos disponibles. Si responde con el catálogo, la
+   instalación fue correcta.
+6. Recuerda al usuario que **el agente y el hook se activan en la siguiente
+   sesión de Kiro**, y que para bajar estándares debe pedir un departamento (lo
+   maneja la skill `sincronizar-departamento`).
 
 ## Notas
 
+- No sobrescribas cambios locales sin avisar: si un archivo ya existe y difiere,
+  señálalo y pregunta antes de reemplazarlo.
 - La instalación **no** baja estándares todavía; solo deja el consultor operativo.
-  La bajada se hace luego pidiendo un departamento (skill `sincronizar-departamento`).
-- No se escribe nada en el repo de estándares durante la instalación.
+- Nunca se escribe en el repo de estándares durante la instalación (es solo
+  lectura).

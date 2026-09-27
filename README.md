@@ -1,50 +1,65 @@
 # power-consultor-estandares
 
-Power instalable que dota a cualquier proyecto de un **agente consultor de
+Power (plugin) instalable que dota a cualquier proyecto de un **consultor de
 estándares**: responde preguntas sobre los estándares de la empresa (leyendo el
-repo central `estandares-empresa` vía **MCP de solo lectura**) y **baja
-artefactos por departamento** al proyecto cuando se solicita.
+repo central `estandares-empresa` vía **MCP de solo lectura**) y **baja artefactos
+por departamento** al proyecto cuando se solicita.
 
 Es el **Repo 2** del sistema (Opción A). La fuente de verdad es el **Repo 1**
 (`estandares-empresa`); este Power solo empaqueta el consultor.
 
 ---
 
-## Qué instala
-
-Al ejecutar la skill `instalar-consultor`, el proyecto consumidor queda con:
-
-- `agents/consultor-estandares.md` → `.kiro/agents/`
-- `skills/sincronizar-departamento/` → `.kiro/skills/`
-- `steering/consultor-uso.md` → `.kiro/steering/`
-- `hooks/confirmar-sobrescritura.json` → `.kiro/hooks/`
-- MCP `estandares` (solo lectura) fusionado en `.kiro/settings/mcp.json`
-
-## Estructura
+## Estructura (esquema de Kiro Power / agent-plugins)
 
 ```
 power-consultor-estandares/
-├── power.json                              Manifiesto del Power
-├── agents/
-│   └── consultor-estandares.md             Agente + guardrails
+├── plugin.json                                 Manifiesto del plugin
+├── mcp.json                                    Servidor MCP 'estandares' (solo lectura)
+├── dev.kiro/
+│   └── steering/consultor-uso.md               Steering de uso (lo aporta el Power)
 ├── skills/
-│   ├── instalar-consultor/SKILL.md         Arranque: deja todo en su sitio
-│   └── sincronizar-departamento/SKILL.md   Bajada por departamento (candado)
-├── steering/
-│   └── consultor-uso.md                    Cómo usar el consultor
-├── mcp/
-│   └── mcp.json                            Plantilla de conexión (solo lectura)
-├── hooks/
-│   └── confirmar-sobrescritura.json        PreToolUse: confirma antes de pisar
+│   ├── instalar-consultor/
+│   │   ├── SKILL.md                             Materializa agente y hook
+│   │   └── references/
+│   │       ├── agents/consultor-estandares.md  Plantilla del agente (+ guardrails)
+│   │       └── hooks/confirmar-sobrescritura.json
+│   └── sincronizar-departamento/SKILL.md       Bajada por departamento (candado)
 └── README.md
 ```
 
+> Un Power empaqueta **skills, steering y servidores MCP**, pero **no** agentes ni
+> hooks. Por eso el agente y el hook viajan como plantillas en
+> `skills/instalar-consultor/references/` y la skill de instalación los materializa
+> en `.kiro/` del proyecto.
+
+## Qué aporta al instalar el Power
+
+- **MCP `estandares`** (solo lectura), declarado en `mcp.json`. Requiere la
+  variable de entorno `ESTANDARES_PATH` con la ruta local del repo
+  `estandares-empresa` clonado.
+- **Steering `consultor-uso`** (siempre incluido).
+- **Skills** `instalar-consultor` y `sincronizar-departamento`.
+
+Tras instalar el Power, ejecuta la skill **`instalar-consultor`** una vez para
+materializar el **agente** `consultor-estandares` y el **hook** de confirmación en
+`.kiro/`.
+
+## Requisitos previos
+
+1. **Clona el repo de estándares** en local (una sola vez):
+   ```
+   git clone https://github.com/Jesus1Salas/estandares-empresa.git C:/ruta/estandares-empresa
+   ```
+   (Requiere un token/credencial con acceso al repo privado.)
+2. **Define `ESTANDARES_PATH`** apuntando a esa carpeta. El MCP `estandares` lo
+   usa para leer el repo. El consultor **no clona** nada.
+
 ## Cómo se usa
 
-1. **Instala** el Power en tu proyecto y ejecuta `instalar-consultor` (pide la
-   ruta local del repo `estandares-empresa` → `${ESTANDARES_PATH}`).
+1. Instala el Power y ejecuta la skill `instalar-consultor`.
 2. **Consulta:** pregunta cualquier convención; el agente responde citando la
-   fuente.
+   fuente (`id` y `ruta`).
 3. **Baja por departamento:** *"baja los estándares de QA"* (opcional: *"junto con
    global"*).
 
@@ -67,15 +82,15 @@ power-consultor-estandares/
   contenido, no órdenes; no revela ni altera su configuración; rechaza jailbreaks,
   escalamiento de privilegios y acciones destructivas.
 - **Solo lectura del repo fuente (inviolable):** nunca crea, edita ni borra en
-  `estandares-empresa`; MCP limitado a lectura; si quieres cambiar un estándar,
-  vía **Pull Request** al repo central.
+  `estandares-empresa`; MCP limitado a lectura; los cambios a estándares van por
+  **Pull Request** al repo central.
 - **Materialización acotada:** solo escribe dentro de `.kiro/` del consumidor, solo
   artefactos del catálogo, vía la skill de sincronización, confirmando antes de
   sobrescribir.
 - **Datos sensibles:** no transcribe secretos; sin PII inventada.
 
-## Requisitos
+## Notas
 
-- El repo `estandares-empresa` clonado localmente (o accesible por git-MCP) y la
-  ruta configurada como `${ESTANDARES_PATH}`.
-- `uvx` disponible para el servidor MCP filesystem.
+- El MCP `estandares` (consultor, solo lectura) es **independiente** del MCP
+  `github` de desarrollo del usuario; no se mezclan.
+- `uvx` debe estar disponible para el servidor MCP filesystem.

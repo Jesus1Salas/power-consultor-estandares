@@ -1,0 +1,18 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "consultor-estandares",
+  "version": "1.0.0",
+  "description": "Instala un consultor de estandares de la empresa: responde preguntas sobre los estandares (via MCP de solo lectura al repo estandares-empresa) y baja artefactos al proyecto por departamento (candado exclusivo con override). Incluye skills de instalacion y sincronizacion, steering de uso y el servidor MCP 'estandares'.",
+  "author": {
+    "name": "Jesus Salas"
+  },
+  "keywords": [
+    "estandares",
+    "consultor",
+    "convenciones",
+    "onboarding",
+    "gobierno",
+    "departamento"
+  ],
+  "license": "MIT"
+}

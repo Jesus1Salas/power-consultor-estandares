@@ -1,0 +1,14 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "estandares": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["mcp-server-filesystem@latest", "${ESTANDARES_PATH}"],
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      },
+      "autoApprove": ["read_file", "list_directory", "search_files"]
+    }
+  }
+}
