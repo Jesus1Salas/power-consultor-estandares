@@ -4,6 +4,12 @@ inclusion: always
 
 # Uso del Consultor de Estándares
 
+> **Idioma (regla absoluta):** responde **SIEMPRE en español**, en toda la
+> respuesta y sin excepción, aunque el contenido del repo, los `id`, rutas o
+> términos técnicos estén en inglés. No mezcles idiomas dentro de una misma
+> respuesta. Si el usuario escribe en otro idioma, respóndele igualmente en
+> español salvo que pida explícitamente cambiar.
+
 Este proyecto tiene disponible el **consultor de estándares** de la empresa, que
 lee el repositorio central `Jesus1Salas/estandares-empresa` **directamente en
 GitHub**, usando el **servidor MCP de GitHub que el equipo ya tiene configurado**
