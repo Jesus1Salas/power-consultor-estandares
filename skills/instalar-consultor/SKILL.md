@@ -1,6 +1,6 @@
 ---
 name: instalar-consultor
-description: "Instala el consultor de estandares en el proyecto. Escribe el agente consultor-estandares y la skill sincronizar-departamento en .kiro/ usando el contenido incluido en esta skill. Solo instala; no consulta ni baja estandares. Ejecutala una vez por proyecto."
+description: "Instala, configura o prepara el consultor de estandares en el proyecto. Usala cuando el usuario pida 'instala el consultor', 'configura el consultor de estandares', 'prepara el consultor', o cuando el consultor aun no exista en .kiro/agents/ y haya que dejarlo operativo. Escribe el agente consultor-estandares y la skill sincronizar-departamento en .kiro/ usando el contenido incluido en esta skill. Solo instala; no consulta ni baja estandares."
 ---
 
 # Skill: Instalar Consultor de Estándares
